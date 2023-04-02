@@ -8,14 +8,17 @@ const App = () => {
 
   useEffect(() => {
     setLoading(true);
+
     fetch(
       `https://gnews.io/api/v4/top-headlines?category=${category}&apikey=9fd8b22cbe7061cc139ea019baad35a5
 
       &max=10&lang=en`
     )
       .then((res) => res.json())
-      .then((data) => setNewsData(data.articles));
-    setLoading(false);
+      .then((data) => {
+        setNewsData(data.articles);
+        setLoading(false);
+      });
   }, [category]);
 
   console.log("newsDta", newsData);
