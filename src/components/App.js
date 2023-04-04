@@ -7,12 +7,8 @@ const App = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setLoading(true);
-
     fetch(
-      `https://gnews.io/api/v4/top-headlines?category=${category}&apikey=9fd8b22cbe7061cc139ea019baad35a5
-
-      &max=10&lang=en`
+      `https://gnews.io/api/v4/top-headlines?category=${category}&apikey=18627a52ea958ef443c09c08adb9a4a5&max=10&lang=en`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -21,10 +17,8 @@ const App = () => {
       });
   }, [category]);
 
-  console.log("newsDta", newsData);
-
-  const handleChange = (e) => {
-    setCategory(e.target.value);
+  const handleChange = (event) => {
+    setCategory(event.target.value);
     setLoading(true);
   };
 
@@ -45,17 +39,17 @@ const App = () => {
         <p className="loader">Loading...</p>
       ) : (
         <ol>
-          {newsData.map((item) => {
+          {newsData.map((items) => {
             return (
-              <li key={item.title}>
-                <img className="news-img" src={item.image} alt="Image" />
+              <li key={items.title}>
+                <img className="news-img" src={items.image} alt="image" />
                 <section className="new-title-content-author">
-                  <h3 className="news-title">{item.title}</h3>
+                  <h3 className="news-title">{items.title}</h3>
                   <section className="new-content-author">
-                    <p className="news-description">{item.description}</p>
+                    <p className="news-description">{items.description}</p>
                     <p className="news-source">
                       <strong>Source:</strong>
-                      {item.source.name}
+                      {items.source.name}
                     </p>
                   </section>
                 </section>
